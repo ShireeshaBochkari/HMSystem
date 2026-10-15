@@ -1,0 +1,20 @@
+:root{--bg:#eef2ef;--ink:#1d2b26;--card:#fff;--g:#1f6f5c;--g2:#d9ece6;--line:#d5ddd9;--red:#b3342b}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 Georgia,'Times New Roman',serif;background:var(--bg);color:var(--ink)}
+button,input,select{font:inherit}a{color:var(--g)}
+header{display:flex;gap:16px;align-items:center;flex-wrap:wrap;background:var(--g);color:#fff;padding:12px 20px}
+header nav{flex:1;display:flex;gap:14px}header a{color:#fff;text-decoration:none;border-bottom:2px solid transparent}header a:hover{border-color:#fff}
+.badge{background:#fff;color:var(--g);border-radius:10px;padding:1px 8px;font-size:12px}
+main,.auth{max-width:900px;margin:20px auto}.card{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:18px}
+.auth{max-width:360px;margin-top:8vh}.bar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:12px}.bar input{flex:1;min-width:140px}
+input,select{padding:8px 10px;border:1px solid var(--line);border-radius:6px;width:100%;background:#fff}
+input:focus,select:focus,button:focus-visible{outline:2px solid var(--g);outline-offset:1px}
+label{display:block;margin-bottom:10px}button{background:var(--g);color:#fff;border:0;border-radius:6px;padding:8px 14px;cursor:pointer;white-space:nowrap}
+button.s{background:var(--g2);color:var(--g)}button.d{background:var(--red)}button:disabled{opacity:.5;cursor:wait}
+.bar button{width:auto}.bar select{width:auto}
+table{width:100%;border-collapse:collapse}th,td{text-align:left;padding:8px;border-bottom:1px solid var(--line)}th{background:var(--g2)}
+.wrap{overflow-x:auto}td button{padding:4px 10px;margin-right:4px}
+.err{color:var(--red);display:block;min-height:0;font-size:13px}.msg{padding:20px;text-align:center;color:#667}
+#pg{display:flex;gap:12px;justify-content:center;align-items:center;margin-top:12px}
+.ov{position:fixed;inset:0;background:#0007;display:grid;place-items:center;padding:16px}.m{width:100%;max-width:400px}
+#toast{position:fixed;bottom:20px;left:50%;transform:translate(-50%,80px);background:var(--g);color:#fff;padding:10px 18px;border-radius:6px;transition:.25s}
+#toast.bad{background:var(--red)}#toast.show{transform:translate(-50%,0)}

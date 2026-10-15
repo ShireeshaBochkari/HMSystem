@@ -1,0 +1,10 @@
+package com.hostel;
+import jakarta.persistence.*;
+@Entity
+public class Student {
+  @Id @GeneratedValue(strategy = GenerationType.IDENTITY) public Long id;
+  @Column(nullable = false) public String name;
+  @Column(unique = true, nullable = false) public String email;
+  public String phone;
+  @ManyToOne(fetch = FetchType.EAGER) @JoinColumn(name = "room_id") public Room room;
+}
