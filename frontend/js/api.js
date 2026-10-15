@@ -2,7 +2,9 @@
 const $=s=>document.querySelector(s);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let auth={token:localStorage.token,user:localStorage.user,role:localStorage.role};   // auth context
-const isAdmin=()=>auth.role==='ADMIN';
+const isOwner=()=>auth.role==='OWNER'||auth.role==='ADMIN';
+const isAdmin=isOwner;
+const isHosteler=()=>auth.role==='HOSTELER'||auth.role==='STUDENT';
 let st={page:0,size:5,sort:'id',q:'',data:null}, rooms=[], tm;
 
 function toast(m,bad){const t=$('#toast');t.textContent=m;t.className=(bad?'bad ':'')+'show';clearTimeout(t.h);t.h=setTimeout(()=>t.className=bad?'bad':'',2600)}

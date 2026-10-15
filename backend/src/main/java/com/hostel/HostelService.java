@@ -10,7 +10,8 @@ public class HostelService {
   public HostelService(StudentRepository s, RoomRepository r) { students = s; rooms = r; }
 
   private StudentDto toDto(Student s) {
-    return new StudentDto(s.id, s.name, s.email, s.phone, s.room == null ? null : s.room.id, s.room == null ? null : s.room.roomNo);
+    return new StudentDto(s.id, s.name, s.email, s.phone, s.user == null ? null : s.user.username,
+        s.room == null ? null : s.room.id, s.room == null ? null : s.room.roomNo);
   }
   public Map<String, Object> listStudents(int page, int size, String sort, String q) {
     String field = Set.of("id", "name", "email").contains(sort) ? sort : "id";

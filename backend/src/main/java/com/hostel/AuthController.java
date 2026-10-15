@@ -3,18 +3,22 @@ import com.hostel.Dtos.*;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @RestController @RequestMapping("/api/auth")
 public class AuthController {
-  private final UserRepository users; private final BCryptPasswordEncoder enc; private final TokenService tokens;
-  public AuthController(UserRepository u, BCryptPasswordEncoder e, TokenService t) { users = u; enc = e; tokens = t; }
+  private final UserRepository users; private final StudentRepository students; private final BCryptPasswordEncoder enc; private final TokenService tokens;
+  public AuthController(UserRepository u, StudentRepository s, BCryptPasswordEncoder e, TokenService t) { users = u; students = s; enc = e; tokens = t; }
 
   @PostMapping("/register")
+  @Transactional
   public ResponseEntity<Map<String, String>> register(@Valid @RequestBody RegisterDto d) {
     if (users.findByUsername(d.username().trim()).isPresent()) throw new ApiException(409, "Username already taken");
-    users.save(new User(d.username().trim(), enc.encode(d.password()), Role.STUDENT));
+    User user = users.save(new User(d.username().trim(), enc.encode(d.password()), Role.HOSTELER));
+    Student student = new Student(); student.user = user; student.name = d.name().trim();
+    student.email = d.email().trim(); student.phone = d.phone(); students.save(student);
     return ResponseEntity.status(201).body(Map.of("message", "Registered"));
   }
   @PostMapping("/login")
